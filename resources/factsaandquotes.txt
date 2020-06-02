@@ -1,0 +1,2 @@
+Random fact $read(facts.txt)
+$read(quote.txt)
