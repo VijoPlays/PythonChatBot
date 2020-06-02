@@ -1,5 +1,3 @@
-#PythonChatBot
-
 This is a Python chat bot that you can use to monitor and respond to messages sent by viewers on your Twitch Account.
 I tried to make it as easy as possible to add more to the bot (e.g. by simply adding new files in the channelCommands file).
 
