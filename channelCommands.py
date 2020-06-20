@@ -23,7 +23,8 @@ channels = {
     "!steam": "http://steamcommunity.com/id/Vijo",
     "!reddit": "https://www.reddit.com/user/VijoPlays/",
     "!battlenet": "http://eu.battle.net/wow/en/character/Argent%20Dawn/Vija/advanced",
-    "!discord": "https://discordapp.com/invite/uHp93ff"
+    "!discord": "https://discordapp.com/invite/uHp93ff",
+    "!projecteir": "https://discord.com/invite/YzP3a8B"
 }
 
 # Put commands with Path variables here. Game/Song/Command all use a "request"-suffix, but the code doesn't allow this.
