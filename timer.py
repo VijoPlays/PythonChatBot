@@ -4,7 +4,9 @@ import datetime
 
 # In theory, this method takes the input of a user and then you can post it to the Twitters through the terminal.
 # In practice this one never allows the bot to progress past this, so I'm just gonna give up on it
-# (Though BackgroundScheduler may do what I want, too lazy for it now).
+#TODO: I finally found a solution for it! I can simply use the threading module, combined with a sleep timer to simulate a threaded scheduler. 
+
+
 # Something more I would like this method to have: Backspace doesn't move to the left, but deletes instead.
 # Enter *should* clear the comment string, but does not for whatever reason.
 
