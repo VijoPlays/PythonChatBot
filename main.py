@@ -196,56 +196,22 @@ def dice():
     """
 Rolls a dice, according to the d they want.
     """
-    diceThrown = False
-    if message.lower() == "!d2":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 2)) + "!")
-    elif message.lower() == "!d3":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 3)) + "!")
-    elif message.lower() == "!d4":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 4)) + "!")
-    elif message.lower() == "!d6":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 6)) + "!")
-    elif message.lower() == "!d8":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 8)) + "!")
-    elif message.lower() == "!d10":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 10)) + "!")
-    elif message.lower() == "!d12":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 12)) + "!")
-    elif message.lower() == "!d20":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 20)) + "!")
-    elif message.lower() == "!d100":
-        diceThrown = True
-        send_message(username + " just rolled a " + str(random.randint(1, 100)) + "!")
-    if diceThrown:
-        timer.timeOut[username + diceThrow] = str(timer.time.time())
+    message_ = message.lower()
+    upper_border = re.search("\d+", message_)
+    send_message(username + " just rolled a " + str(random.randint(1, upper_border)) + "!")
+    timer.timeOut[username + diceThrow] = str(timer.time.time())
 
 
-def random_line(file):
-    openedFile = open(file)
-    allLines = openedFile.read().splitlines()
-    sentLine = random.choice(allLines)
-    openedFile.close()
-    return sentLine
+def random_line(path):
+    with open(path) as opened_file:
+        all_lines = opened_file.read().splitlines()
+        sent_line = random.choice(all_lines)
+        return sent_line
 
 
-def fileLength(file):
-    if os.stat(file).st_size != 0:
-        openedFile = open(file)
-        with openedFile as fileLine:
-            for j, l in enumerate(fileLine):
-                pass
-        openedFile.close()
-        return j + 1
-    else:
-        return 0
+def file_length(path):
+    with open(path) as file:
+        return len(file.read().splitlines())
 
 
 def send_message(sentMessage):
@@ -313,8 +279,8 @@ while True:
             if receivedMessages >= quoteMessageRequirement and (timer.time.time() - float(timer.timeOut.get("receivedQuoteTimer"))) >= quoteTimeout:
                 timer.timeOut["receivedQuoteTimer"] = str(timer.time.time())
 
-                quoteLength = fileLength(channelCommands.pathQuotes)
-                factLength = fileLength(channelCommands.pathFact)
+                quoteLength = file_length(channelCommands.pathQuotes)
+                factLength = file_length(channelCommands.pathFact)
                 randInt = random.randint(1, (quoteLength + factLength))
                 if randInt >= factLength:
                     send_message(random_line(channelCommands.pathCommands.get("!fact")))
@@ -325,7 +291,7 @@ while True:
         username = username_split[0]
 
         curLine = 1
-        blackLength = fileLength(channelCommands.pathBlacklist)
+        blackLength = file_length(channelCommands.pathBlacklist)
         blackFile = open(channelCommands.pathBlacklist, "r")
         while curLine <= blackLength:
             username.lower()
