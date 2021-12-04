@@ -34,6 +34,7 @@ diceThrow = "diceThrow"
 isBlacklisted = False
 oldSong = ""
 
+print("Beep, boop. I am now online in the channel of: " + channel + "!")
 
 def schedule_routine(sender):
     """
@@ -196,10 +197,37 @@ def dice():
     """
 Rolls a dice, according to the d they want.
     """
-    message_ = message.lower()
-    upper_border = re.search("\d+", message_)
-    send_message(username + " just rolled a " + str(random.randint(1, upper_border)) + "!")
-    timer.timeOut[username + diceThrow] = str(timer.time.time())
+    diceThrown = False
+    if message.lower() == "!d2":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 2)) + "!")
+    elif message.lower() == "!d3":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 3)) + "!")
+    elif message.lower() == "!d4":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 4)) + "!")
+    elif message.lower() == "!d6":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 6)) + "!")
+    elif message.lower() == "!d8":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 8)) + "!")
+    elif message.lower() == "!d10":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 10)) + "!")
+    elif message.lower() == "!d12":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 12)) + "!")
+    elif message.lower() == "!d20":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 20)) + "!")
+    elif message.lower() == "!d100":
+        diceThrown = True
+        send_message(username + " just rolled a " + str(random.randint(1, 100)) + "!")
+    if diceThrown:
+        timer.timeOut[username + diceThrow] = str(timer.time.time())
+
 
 
 def random_line(path):

@@ -36,7 +36,7 @@ pathCommands = {
     "!recipe": pathRecipes,
     "!randdomquote": pathQuotes,
     "!shalli": pathYesno,
-    "!schedule": "BEWARE: THIS IS THE OLD SCHEDULE - CURRENTLY THERE IS NO SCHEDULE: ",
+    "!schedule": "",
     "!game": "Thank you very much for your contribution & interest, comrade. Vijo will take a look and might just play it!",
     "!song": "Thank you very much for your contribution & interest, comrade. It might take some time until this song appears in the playlist, German laws and such... *grr*",
     "!command": "Thank you very much for your interest, comrade! Vijo will take a look and see if he can implement such a weird command...",
@@ -46,7 +46,7 @@ pathCommands = {
 
 # Put unique 'interactions' here.
 hahaLinks = {
-    "!instagram": "Vijo is sorry, but for now he does not participate in such mainstream tasks!",
+    "!instagram": "Instagram, blarp: https://www.instagram.com/vijoplays/",
     "!merch": "As if I could afford merch, lol.",
     "!snapchat": "[Insert text from !instagram into this one.]",
     "!patreon": "Although Vijo doesn't like this, I'm just going to drop the requested link here... He just created "
@@ -61,6 +61,7 @@ hahaLinks = {
     "!wikipedia": "Here you go, click the link for a random Wikipedia article: https://goo.gl/oKPHsp",
     "!commands": "Here's the list of things I listen to *rawr*: https://docs.google.com/document/d/1yg9t_kCep2T_sQEX9eu0d8q_Kb6I9zwH9ifDjjHZHLs/edit - Alternatively you can always click 'The Bot' to the left. ",
     "!playlist": "Here's the link to my playlist: https://play.spotify.com/user/blfasan/playlist/2af92Mg3Xa59DjIDl1nmfR",
+    "!pdxPlaylist": "Here's the link to my playlist, when playing stupid map games: https://open.spotify.com/playlist/1xDXF5UqDgaH9YvgcLe0Rq?si=0954c59311784123",
     "!camping": "As long as you say 'no homo', having 3 d*cks in your mouth does not necessarily mean that you're gay... That's at least what my dad always told me when we went on a camping trip!",
     "!cardgame": "Playing a Children's card game is like making love. It's always on a table and you'll feel deep shame afterwards! Also, the older you get, the less fun it is. So remember, always wear a condom when playing card games."
 }
