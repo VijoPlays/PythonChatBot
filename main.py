@@ -6,6 +6,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import channelCommands
 import timer
 
+#TODO: Logging instead of print//Refactor as well
+
 # Change nick to the channel you want to invade with the bot, change pass to the Oauth of your bot account.
 address = "irc.twitch.tv"
 port = 6667
@@ -55,15 +57,13 @@ This method contains most of the intelligence, the rest is *mostly* just setup a
 
         elif sender == "request":
             if messageNoSpace == "!schedule":
-                pathSchedule = open(channelCommands.pathSchedule, "r")
-                send_message(str(channelCommands.pathCommands.get(channelPathKeys[i])) + pathSchedule.read())
-                pathSchedule.close()
+                with open(channelCommands.pathSchedule, "r") as pathSchedule:
+                    send_message(str(channelCommands.pathCommands.get(channelPathKeys[i])) + pathSchedule.read())
 
             elif messageNoSpace == "!song" or messageNoSpace == "!game" or messageNoSpace == "!command":
                 send_message(channelCommands.pathCommands.get(channelPathKeys[i]))
-                pathReq = open(channelCommands.pathRequest, "a")
-                pathReq.write("\n" + channelPathKeys[i] + ": " + messageNoRequest)
-                pathReq.close()
+                with open(channelCommands.pathRequest, "a") as pathReq:
+                    pathReq.write("\n" + channelPathKeys[i] + ": " + messageNoRequest)
 
             elif messageNoSpace == "!shoutout" or messageNoSpace == "!so":
                 send_message(str("Oh, hey guys! You should totally check out " + messageNoRequest + " over at https://www.twitch.tv/" + messageNoRequest + " ! This puny human probably creates nice content, or not. As a bot I don't have any feelings on either side regarding this."))
@@ -152,10 +152,9 @@ This method contains most of the intelligence, the rest is *mostly* just setup a
         elif sender == "highlight":
             timer.timeOut[username + "!highlight"] = str(timer.time.time())
             try:
-                pathRequest = open(channelCommands.pathRequest, "a")
-                pathRequest.write("\nHighlight (Day: " + str(timer.datetime.datetime.now()) + ") @" + str(
-                    timer.convertToTime(timer.time.time() - bootingTime)) + " " + messageNoRequest)
-                pathRequest.close()
+                with open(channelCommands.pathRequest, "a") as pathRequest:
+                    pathRequest.write("\nHighlight (Day: " + str(timer.datetime.datetime.now()) + ") @" + str(
+                        timer.convertToTime(timer.time.time() - bootingTime)) + " " + messageNoRequest)
                 send_message(channelCommands.additionalCommands.get("!highlight"))
             except AttributeError:
                 pass
@@ -260,9 +259,8 @@ def curSong():
     """
 Calls out only the currently playing song.
     """
-    snipFile = open(channelCommands.pathSnip, "r")
-    song = snipFile.readline()
-    snipFile.close()
+    with open(channelCommands.pathSnip, "r") as snipFile:
+        song = snipFile.readline().replace("||", "")
 
     if song != "":
         send_message("Now playing: " + song)
@@ -274,9 +272,8 @@ Calls out previous and currently playing Song.
     """
     global oldSong
 
-    snipFile = open(channelCommands.pathSnip, "r")
-    song = snipFile.readline()
-    snipFile.close()
+    with open(channelCommands.pathSnip, "r") as snipFile:
+        song = snipFile.readline().replace("||", "")
 
     if song != oldSong:
         if oldSong != "":
@@ -320,15 +317,15 @@ while True:
 
         curLine = 1
         blackLength = file_length(channelCommands.pathBlacklist)
-        blackFile = open(channelCommands.pathBlacklist, "r")
-        while curLine <= blackLength:
-            username.lower()
-            curlinestr = blackFile.readline().lower().strip()
-            if curlinestr == username.lower():
-                blackFile.close()
-                isBlacklisted = True
-                break
-            curLine += 1
+        with open(channelCommands.pathBlacklist, "r") as blackFile:
+            while curLine <= blackLength:
+                username.lower()
+                curlinestr = blackFile.readline().lower().strip()
+                if curlinestr == username.lower():
+                    blackFile.close()
+                    isBlacklisted = True
+                    break
+                curLine += 1
 
         if not isBlacklisted:
             blackFile.close()
@@ -393,9 +390,8 @@ while True:
                 messageSplit = message.split("!addquote")
                 messageNoSpace = messageSplit[0]
                 messageNoRequest = messageSplit[1].strip()
-                pathQuote = open(channelCommands.pathQuotes, "a")
-                pathQuote.write("\n" + messageNoRequest)
-                pathQuote.close()
+                with open(channelCommands.pathQuotes, "a") as pathQuote:
+                    pathQuote.write("\n" + messageNoRequest)
                 send_message(username + " just added '" + messageNoRequest + "' to the roster.")
 
             elif message.startswith("!highlight"):
